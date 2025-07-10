@@ -1,0 +1,19 @@
+name: :rocket: Deploy website on push
+on:
+  push:
+    branches:
+      - main
+jobs:
+  web-deploy:
+    name: :tada: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: :truck: Get latest code
+      uses: actions/checkout@v2
+    - name: :open_file_folder: Sync build files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.0-beta
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./build/

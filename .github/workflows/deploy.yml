@@ -31,4 +31,3 @@ jobs:
     local-dir: ./build/
     protocol: ftps
     port: 21
-    server-dir: /home/eisexgmp/7ringsstore.com/

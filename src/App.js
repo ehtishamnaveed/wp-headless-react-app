@@ -10,7 +10,7 @@ function OrdersTest() {
   async function loadOrders() {
     try {
       // const response = await axios.get("http://localhost:3001/orders");
-      const response = await axios.get("http://api.7ringsstore.com/orders");
+      const response = await axios.get("https://api.7ringsstore.com/orders");
       // response.data should be an array of orders
       const data = response.data;
 
@@ -41,7 +41,7 @@ function OrdersTest() {
     borderRadius: "8px",
     boxShadow: "0 2px 8px rgba(0,0,0,0.07)"
   }}>
-    <h2 style={{ textAlign: "center", marginBottom: "24px" }}>Orders List</h2>
+    <h2 className="text-5xl bg-black text-white px-4" style={{ textAlign: "center", marginBottom: "24px" }}>Orders List</h2>
 
     {orders.length === 0 ? (
       <div style={{ textAlign: "center", color: "#888" }}>No orders found.</div>

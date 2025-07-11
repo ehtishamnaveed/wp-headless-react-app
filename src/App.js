@@ -10,7 +10,7 @@ function OrdersTest() {
   async function loadOrders() {
     try {
       // const response = await axios.get("http://localhost:3001/orders");
-      const response = await axios.get("https://api.7ringsstore.com/orders");
+      const response = await axios.get("http://api.7ringsstore.com/orders");
       // response.data should be an array of orders
       const data = response.data;
 

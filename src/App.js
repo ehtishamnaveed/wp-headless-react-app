@@ -4,8 +4,8 @@ import axios from 'axios';
 const ApiTestButtons = () => {
   
   const handleFetchRequest = () => {
-    // Get existing cart_key from sessionStorage
-    const existingCartKey = sessionStorage.getItem('cart_key');
+    // Get existing cart_key from localStorage
+    const existingCartKey = localStorage.getItem('cart_key');
     
     const requestBody = {
       "id": "52",
@@ -17,7 +17,7 @@ const ApiTestButtons = () => {
       requestBody.cart_key = existingCartKey;
     }
     
-    fetch('https://36934f339448.ngrok-free.app/api/cart/add-item', {
+    fetch('https://8c75d06d5500.ngrok-free.app/api/cart/add-item', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,18 +28,18 @@ const ApiTestButtons = () => {
     .then(data => {
       console.log('Fetch response:', data);
       
-      // Store cart_key if returned from server
+      // Store cart_key in localStorage if returned from server
       if (data.cart_key || data.result?.cart_key) {
         const cartKey = data.cart_key || data.result?.cart_key;
-        sessionStorage.setItem('cart_key', cartKey);
-        console.log('Cart key stored:', cartKey);
+        localStorage.setItem('cart_key', cartKey);
+        console.log('Cart key stored in localStorage:', cartKey);
       }
     })
     .catch(error => console.error('Fetch error:', error));
   };
 
   const handleAxiosRequest = () => {
-    const existingCartKey = sessionStorage.getItem('cart_key');
+    const existingCartKey = localStorage.getItem('cart_key');
     
     const requestBody = {
       "id": "52",
@@ -50,7 +50,7 @@ const ApiTestButtons = () => {
       requestBody.cart_key = existingCartKey;
     }
     
-    axios.post('https://36934f339448.ngrok-free.app/api/cart/add-item', requestBody, {
+    axios.post('https://8c75d06d5500.ngrok-free.app/api/cart/add-item', requestBody, {
       headers: {
         'Content-Type': 'application/json',
       }
@@ -58,11 +58,11 @@ const ApiTestButtons = () => {
     .then(response => {
       console.log('Axios response:', response.data);
       
-      // Store cart_key if returned from server
+      // Store cart_key in localStorage if returned from server
       if (response.data.cart_key || response.data.result?.cart_key) {
         const cartKey = response.data.cart_key || response.data.result?.cart_key;
-        sessionStorage.setItem('cart_key', cartKey);
-        console.log('Cart key stored:', cartKey);
+        localStorage.setItem('cart_key', cartKey);
+        console.log('Cart key stored in localStorage:', cartKey);
       }
     })
     .catch(error => console.error('Axios error:', error));
@@ -70,8 +70,14 @@ const ApiTestButtons = () => {
 
   // Helper function to check current cart_key
   const checkCartKey = () => {
-    const cartKey = sessionStorage.getItem('cart_key');
-    console.log('Current cart_key:', cartKey || 'None');
+    const cartKey = localStorage.getItem('cart_key');
+    console.log('Current cart_key in localStorage:', cartKey || 'None');
+  };
+
+  // Helper function to clear cart_key (for testing)
+  const clearCartKey = () => {
+    localStorage.removeItem('cart_key');
+    console.log('Cart key cleared from localStorage');
   };
 
   return (
@@ -119,6 +125,21 @@ const ApiTestButtons = () => {
         }}
       >
         Check Cart Key
+      </button>
+
+      <button 
+        onClick={clearCartKey}
+        style={{ 
+          margin: '10px', 
+          padding: '10px 20px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}
+      >
+        Clear Cart Key
       </button>
     </div>
   );

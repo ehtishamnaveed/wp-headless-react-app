@@ -4,7 +4,7 @@ import axios from 'axios';
 const ApiTestButtons = () => {
   
   const handleFetchRequest = () => {
-    fetch('https://8c75d06d5500.ngrok-free.app/api/add-item', {
+    fetch('https://8c75d06d5500.ngrok-free.app/api/cart/add-item', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ const ApiTestButtons = () => {
   };
 
   const handleAxiosRequest = () => {
-    axios.post('https://8c75d06d5500.ngrok-free.app/api/add-item', {
+    axios.post('https://8c75d06d5500.ngrok-free.app/api/cart/add-item', {
       "id": "52",
       "quantity": "10"
     }, {

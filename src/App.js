@@ -17,7 +17,7 @@ const ApiTestButtons = () => {
       requestBody.cart_key = existingCartKey;
     }
     
-    fetch('https://8c75d06d5500.ngrok-free.app/api/cart/add-item', {
+    fetch('https://36934f339448.ngrok-free.app/api/cart/add-item', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const ApiTestButtons = () => {
       requestBody.cart_key = existingCartKey;
     }
     
-    axios.post('https://8c75d06d5500.ngrok-free.app/api/cart/add-item', requestBody, {
+    axios.post('https://36934f339448.ngrok-free.app/api/cart/add-item', requestBody, {
       headers: {
         'Content-Type': 'application/json',
       }

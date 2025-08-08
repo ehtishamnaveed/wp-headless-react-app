@@ -1,106 +1,70 @@
-import React, { useState, useEffect } from "react";
-// import {fetchOrders} from "./OrderDetails"
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
-function OrdersTest() {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
+const ApiTestButtons = () => {
+  
+  const handleFetchRequest = () => {
+    fetch('http://api.7ringsstore.com/api/add-item', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "id": "52",
+      "quantity": "10"
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log('Fetch response:', data))
+    .catch(error => console.error('Fetch error:', error));
+  };
 
-  useEffect(() => {
-    async function loadOrders() {
-      try {
-        // const response = await axios.get("http://localhost:3001/orders");
-        const response = await axios.get("https://api.7ringsstore.com/orders");
-        // response.data should be an array of orders
-        const data = response.data;
-
-        // Map over the array to format your orders
-        // const ordersData = data.map(order => ({
-        //   orderID: order.id,
-        //   orderTotal: order.total,
-        //   orderStatus: order.status
-        // }));
-
-        setOrders(data);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
+  const handleAxiosRequest = () => {
+    axios.post('http://api.7ringsstore.com/api/add-item', {
+      "id": "52",
+      "quantity": "10"
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
       }
-    }
-    loadOrders();
-  }, []);
-
-  if (loading) return <div>Loading orders...</div>;
+    })
+    .then(response => console.log('Axios response:', response.data))
+    .catch(error => console.error('Axios error:', error));
+  };
 
   return (
-    <div
-      style={{
-        maxWidth: "800px",
-        margin: "40px auto",
-        padding: "24px",
-        background: "#fff",
-        borderRadius: "8px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
-      }}
-    >
-      <h2
-        className="text-5xl bg-black text-white px-4"
-        style={{ textAlign: "center", marginBottom: "24px" }}
+    <div style={{ padding: '20px' }}>
+      <button 
+        onClick={handleFetchRequest}
+        style={{ 
+          margin: '10px', 
+          padding: '10px 20px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}
       >
-        Orders List
-      </h2>
-
-      {orders.length === 0 ? (
-        <div style={{ textAlign: "center", color: "#888" }}>
-          No orders found.
-        </div>
-      ) : (
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-            fontSize: "1rem",
-          }}
-        >
-          <thead>
-            <tr>
-              {/* Dynamically render header cells */}
-              {Object.keys(orders[0]).map((key) => (
-                <th
-                  key={key}
-                  style={{
-                    borderBottom: "2px solid #f0f0f0",
-                    padding: "10px",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {key}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order, idx) => (
-              <tr key={order.orderID || idx}>
-                {Object.keys(order).map((key) => (
-                  <td
-                    key={key}
-                    style={{
-                      borderBottom: "1px solid #eee",
-                      padding: "10px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {String(order[key])}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+        Test with Fetch
+      </button>
+      
+      <button 
+        onClick={handleAxiosRequest}
+        style={{ 
+          margin: '10px', 
+          padding: '10px 20px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}
+      >
+        Test with Axios
+      </button>
     </div>
   );
-}
+};
 
-export default OrdersTest;
+export default ApiTestButtons;

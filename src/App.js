@@ -4,11 +4,12 @@ import axios from 'axios';
 const ApiTestButtons = () => {
   
   const handleFetchRequest = () => {
-    fetch('http://api.7ringsstore.com/api/add-item', {
+    fetch('https://8c75d06d5500.ngrok-free.app/api/add-item', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify({
         "id": "52",
       "quantity": "10"
@@ -20,13 +21,14 @@ const ApiTestButtons = () => {
   };
 
   const handleAxiosRequest = () => {
-    axios.post('http://api.7ringsstore.com/api/add-item', {
+    axios.post('https://8c75d06d5500.ngrok-free.app/api/add-item', {
       "id": "52",
       "quantity": "10"
     }, {
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
+      credentials: 'include',
     })
     .then(response => console.log('Axios response:', response.data))
     .catch(error => console.error('Axios error:', error));
